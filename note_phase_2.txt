@@ -1,0 +1,216 @@
+validation_face_type isinya:
+- face_detection (1)
+- face_recognition (2)
+
+is_face_recognition_registered
+- 0 : belum regis
+- 1: sudah regis
+
+is_face_recognition_validated
+- 0 : ditolak
+- 1 : diterima
+- 2 : sedang di proses
+- default : null
+
+
+Utk reminder saja bahwa ada juga parameter tracking live location yang bisa disetting on atau off ya. 
+Kalau off berarti menunya di mobile gk bisa dijalanin dan ada pesan yang menyatakan 
+menu tersebut dalam kondisi non aktif
+
+////////////////////////
+response attenddance yang di harapkan
+{
+    "code": "0",
+    "status": "Success",
+    "datetime": "2022-05-12 13:50:29",
+    "data": {
+        "clock_in": null,
+        "clock_out": null,
+        "shift": {
+            "name": "Normal",
+            "in": {
+                "time": "07:00",
+                "timezone": "WIB"
+            },
+            "out": {
+                "time": "17:00",
+                "timezone": "WIB"
+            }
+        },
+        "quota": 1,
+        "Deklarasi":{
+          "kesehatan":1,
+          "fasilitas":0
+        },
+        "isDeklarasiFilled":{
+          "kesehatan":0,
+          "fasilitas":0
+        },
+        "work_outside_schedule": 0,
+    }
+}
+
+
+setelah mengkaji ulang RD yang di kirim oleh pak imam terkait attendanc
+maka response api attendance yang di butuhkan sebagai berikut
+{
+    "code": "0",
+    "status": "Success",
+    "datetime": "2022-05-12 13:50:29",
+    "data": {
+        "clock_in": null,
+        "clock_out": null,
+        "shift": {
+            "name": "Normal",
+            "in": {
+                "time": "07:00",
+                "timezone": "WIB"
+            },
+            "out": {
+                "time": "17:00",
+                "timezone": "WIB"
+            }
+        },
+        "quota": 1,
+        "deklarasi":{
+          "kesehatan":1,
+          "fasilitas":0
+        },
+        "isDeklarasiFilled":{
+          "kesehatan":0,
+          "fasilitas":0
+        },
+        "work_outside_schedule": 0,
+    }
+}
+
+atau
+
+{
+    "code": "0",
+    "status": "Success",
+    "datetime": "2022-05-12 13:50:29",
+    "data": {
+        "clock_in": null,
+        "clock_out": null,
+        "tipe_absensi":null <<=== (berurut atau tidak berurut) kaitan nya apabila berurut user tida bisa clockout sebelum clock in
+        "shift": {
+            "name": "Normal",
+            "jenis_shift":"" <<=========
+            "in": {
+                "time": "07:00",
+                "timezone": "WIB"
+            },
+            "out": {
+                "time": "17:00",
+                "timezone": "WIB"
+            }
+        },
+        "quota": 1,
+        "declaration": [
+            {
+                "id": 1,
+                "code": "PDXD2220512505001",
+                "title": "Deklarasi Kesehatan 1",
+                "description": "form deklarasi kesehatan",
+                "status": 1,
+                "company_id": 127,
+                "created_by": 505,
+                "updated_by": 505,
+                "deleted_at": null,
+                "created_at": "2022-05-12 12:23:25",
+                "updated_at": "2022-05-12 12:23:25",
+                "timezone": "WIB",
+                "delivery_type": "seluruh karyawan",
+                "delivery_type_list": null,
+                "is_attendance": true,  <<<== apakah attendance ini terkait absensi atau tidak (kalau true terkait, kalau false tidak terkait)
+                "is_scoring": true,
+                "total_score_from": 0,
+                "total_score_to": 0,
+                "isfilled": true,
+                "ispriority": true,
+                "date": "2022-05-12 12:23:25"
+            },
+        ],
+        "work_outside_schedule": 0,
+        "isRadiusLocation": 1 <<<<==============
+    }
+}
+
+{
+    "code": "0",
+    "status": "Success",
+    "datetime": "2022-05-24 09:31:51 WIB",
+    "data": {
+        "clock_in": null,
+        "clock_out": null,
+        "absence_type": "berurutan",
+        "shift": {
+            "id": 2,
+            "code": "SHAPJ2205163001",
+            "name": "TEST",
+            "type": "Fixed Hour",
+            "detail": null
+        },
+        "parameter": {
+            "health_declaration": [
+                {
+                    "id": 1,
+                    "code": "PDXD2220512505001",
+                    "title": "Deklarasi Kesehatan 1",
+                    "description": "form deklarasi kesehatan",
+                    "delivery_type": "seluruh karyawan",
+                    "delivery_type_list": null,
+                    "is_attendance": true,
+                    "is_scoring": true,
+                    "total_score_from": 0,
+                    "total_score_to": 0,
+                    "is_filled": false,
+                    "is_passed": false,
+                    "is_priority": true
+                }
+            ],
+            "quota": false,
+            "work_outside_schedule": false
+        }
+    }
+}
+
+keterangan :
+    - Quota
+        * value "1" menandakan company menerapkan sistem quota
+        * value "0" menandakan company tidak menerapkan sistem Quota
+    - work_outside_schedule
+        * value "1" menandakan company menerapkan sistem kerja di luar kantor
+        * value "0" menandakan company tidak menerapkan sistem kerja diluar kantor
+
+tambahan data untuk respon get user by id or Email
+role : untuk menentukan user bisa mengkases menu apa aja
+jabatan: untuk menentukan user bisa membuka live location atau tidak
+
+awal:
+- is_face_recognition_registered = 0
+- is_face_recognition_validated = 0
+
+sudah register, belum diverif:
+- is_face_recognition_registered = 1
+- is_face_recognition_validated = 0
+
+sudah register, sudah verif, reject:
+- is_face_recognition_registered = 0
+- is_face_recognition_validated = 0
+
+sudah register, sudah verif, approve:
+- is_face_recognition_registered =  1
+- is_face_recognition_validated =  2   
+
+register ulang :
+- is_face_recognition_registered = 1
+- is_face_recognition_validated = 1
+
+register ulang reject : 
+- is_face_recognition_registered = 1
+- is_face_recognition_validated = 3
+
+sudah bisa login atau belum 
+register

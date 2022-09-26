@@ -1,0 +1,101 @@
+flutter build appbundle --no-sound-null-safety => untuk ke playstore 
+flutter build apk --release --no-sound-null-safety =< untuk build apk release
+
+1. version 1.0.0+4 mengganti base url ke production
+2. version: 1.0.1+5
+    1. gambar tidak tampil di view dokument (clear)
+    2. ubah nama app di handphon menjadi WrkPln (clear)
+    3. hilangkan notif "Fitur Biometrics tidak tersedia pada device anda" (clear)
+    4. mau tes ubah foto profile tapi fotonya tidak muncul
+3. version: 1.0.2+6
+    1. handle resert password agar tidak bisa di click berkali2 (16/02/2022)
+4. version: 1.0.2+9 (sudah di deploy ke playstore)
+    1. jenis aktivitas tidak bisa di edit ketika terima inbox taks
+5. version: 1.0.2+10 (belum di deploy ke playstore)
+    1. perbaikan edit data ketika receice task di inbox tast (workplan_receive.dart)
+6. version: 1.0.3+10 (sudah di share)
+    1. hapus seluruh sessionTimer
+7. version: 1.0.4+10 (sudah di share)
+    1. perbaikan agar tidak terlogout ketika keluar aplikasi tanpa logout manual
+8. version: 1.0.5+12
+    1. perbaikan notification jika batas waktu 999 tidak ditampilkan notification
+9. version: 1.0.6+12
+    1. perbaikan looping company code, memberikan flag/tanda apabila company code sudah ditemukan maka tidak perlu di cari lagi     
+       daftar biometrik multi company
+10. version: 1.0.7+14
+    1. memberikan pengecekan gps aktiv atau tidak ketika checkin atau check out
+       file: visit_process.dart dan visit_checkout.dart
+11. version: 1.0.8+14
+    1. perbaikan map di checkin tidak tampil
+12. version: 1.0.9+14
+    1. membuat fungsi kamera menjadi bisa switch (bisa menggunakan camera depan Belakang)
+        file : visit_checkin_take_picture.dart
+13. version: 1.0.10+14
+    1. membuat fungsi untuk mengetahui app yang di build uat, beta, atau prod
+        file: loginscreen.dart
+    2. menambah field keterangan di menu checkin
+        file: visit_checkin.dart
+13. version: 1.0.11+14
+    1. memperbaiki fungsi pengambilan gambar
+        file: workplan_data_dokumen_detail.dart
+    2. memperbaiki posisi icon pencil di
+        file: workplan_visit_list.dart
+14. version: 1.0.12+14
+    kamera di kemballikan ke bentuk awal
+    tombol upload dokumen ketika di click menjadi disable
+    penambahan logic pengecekan Mock Location (lokasi tiruan)
+15. version: 1.0.18+14
+    menambahkan tombol Register Face Recognition di menu Setting
+16. version: 1.0.27+14
+    memperbaiki error senggolan di
+    - dimenu tampbah master task di form inputnya ada huruf "E"
+    - setelah ambil foto, foto tida bisa di tampilkan di
+    - cetika clock in dapat pesan "jam kerja sudah lewat" padahal belum
+17. version: 1.0.28+14
+    - penambahan fungsi gps tracking
+18. version: 1.0.29+14
+    - perbaikan info windows di viewGps Tracking
+18. version: 1.0.30+14
+    - perbaikan error log no 63
+    - penambahan vitur can role menu can view
+18. version: 1.0.31+14
+    - penambahan vitur role, isAdd dan isEdit
+19. version: 1.0.32+14
+    - penambahan vitur adjust attendance
+20. version: 1.0.33+14
+    - penambahan response ketika mencet tombol submit attendance
+    - live tracking
+21. version: 1.0.34+14
+    - perbaikan bottom overflow di keterangan_clock_in_clock_out.dart
+22. version: 1.0.35+14
+    - penyesuaian tampilan tanggal di menu attendace sesuai dengan rd di file attendance.dart 
+23. version: 1.0.36+14
+    - perbaikan timezone di file visit_checkout.dart
+25. version: 1.0.37+14
+    - error log No 77
+        Tidak bisa absen ketika user memiliki jadwal kerja diluar kantor, pesan yang muncul saat ingin clock in "null"
+    - error log No 88, Ketika ingin mengajukan req adjust attendance, muncul tampilan error layar merah
+    - error log No 89
+        point 1 : Muncul layar merah error saat masuk ke menu Personal Info
+    - error log NO 91
+        Muncul tampilan error right overflow pixel
+    - error log No 92
+        point 1 : Ketika di menu face scanning, lalu menekan tombol cancel, yang terjadi user justru diarahkan ke menu Setting (personal info). Seharusnya kembali ke menu sebelumnya
+26. version: 1.0.38+14
+    - error log No 98
+27. version: 1.0.39+14
+    - error log No. 77
+        Tidak bisa absen ketika user memiliki jadwal kerja diluar kantor, pesan yang muncul saat ingin clock in "null"
+    - error log No. 89
+        "Error senggolan yang sebelumnya sudah benar :
+        - Muncul layar merah error saat masuk ke menu Personal Info
+        - Proses loading yang lama di menu setting
+        - Di menu Personal Info, tidak bisa menyimpan data setelah menekan tombol submit, muncul pesan ""Mohon maaf anda gagal update data"""
+28. version: 1.0.40+14
+    - error log No. 89
+        - Proses loading yang lama di menu setting, dan belum disamakan dengan fase 1
+28. version: 1.0.41+14
+    - error log No. 87
+        - terbaca di luar radius
+    
+    
